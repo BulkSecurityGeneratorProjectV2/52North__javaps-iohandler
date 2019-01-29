@@ -49,8 +49,8 @@ import org.slf4j.LoggerFactory;
  *
  */
 @Properties(
-        defaultPropertyFileName = "genericfilehandler.properties",
-        propertyFileName = "genericfilehandler.properties")
+        defaultPropertyFileName = "genericfilehandler.default.json",
+        propertyFileName = "genericfilparser.json")
 public class GenericFileParser extends AbstractPropertiesInputOutputHandler implements InputHandler {
 
     private static Logger LOGGER = LoggerFactory.getLogger(GenericFileParser.class);

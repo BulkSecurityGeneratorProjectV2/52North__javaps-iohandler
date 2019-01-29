@@ -104,8 +104,8 @@ public final class GenericFileDataConstants implements ConfigurableClass {
 
                 Properties ioProperties = new Properties();
 
-                try (InputStream in = GenericFileDataConstants.class.getResourceAsStream(
-                        "/org/n52/wps/io/io.properties")) {
+                try (InputStream in = GenericFileDataConstants.class.getClassLoader().getResourceAsStream(
+                        "io.properties")) {
 
                     ioProperties.load(in);
 

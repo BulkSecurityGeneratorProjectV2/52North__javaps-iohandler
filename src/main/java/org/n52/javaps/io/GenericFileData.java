@@ -215,7 +215,6 @@ public class GenericFileData {
             throw new RuntimeException(message);
         }
 
-
         // alter FileName for return
         fileName = currentFile.getAbsolutePath();
 
@@ -238,7 +237,7 @@ public class GenericFileData {
                 }
                 primaryFile = File.createTempFile(UUID.randomUUID().toString(), "." + extension);
                 OutputStream out = new FileOutputStream(primaryFile);
-                byte buf[] = new byte[1024];
+                byte[] buf = new byte[1024];
                 int len;
                 while ((len = dataStream.read(buf)) > 0) {
                     out.write(buf, 0, len);

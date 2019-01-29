@@ -33,6 +33,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.io.WKTWriter;
 import org.n52.javaps.annotation.Properties;
 import org.n52.javaps.description.TypedProcessOutputDescription;
 import org.n52.javaps.io.AbstractPropertiesInputOutputHandler;
@@ -42,9 +44,6 @@ import org.n52.javaps.io.OutputHandler;
 import org.n52.javaps.io.data.binding.complex.JTSGeometryBinding;
 import org.n52.shetland.ogc.wps.Format;
 
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.io.WKTWriter;
-
 /**
  * This class generates a String representation out of a JTS Geometry.
  *
@@ -52,7 +51,8 @@ import com.vividsolutions.jts.io.WKTWriter;
  *
  */
 @Properties(
-        defaultPropertyFileName = "wkt.properties")
+        defaultPropertyFileName = "wkthandler.default.json",
+        propertyFileName = "wktgenerator.json")
 public class WKTGenerator extends AbstractPropertiesInputOutputHandler implements OutputHandler {
 
     public WKTGenerator() {

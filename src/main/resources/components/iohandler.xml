@@ -29,5 +29,7 @@
 	<bean id="genericfileGenerator" class="org.n52.javaps.io.datahandler.generator.GenericFileGenerator" />
 	<bean id="wktParser" class="org.n52.javaps.io.datahandler.parser.WKTParser" />
 	<bean id="wktGenerator" class="org.n52.javaps.io.datahandler.generator.WKTGenerator" />
+	<bean id="genericXMLDataParser" class="org.n52.javaps.io.datahandler.parser.GenericXMLDataParser" />
+	<bean id="genericXMLDataGenerator" class="org.n52.javaps.io.datahandler.generator.GenericXMLDataGenerator" />
 
 </beans>

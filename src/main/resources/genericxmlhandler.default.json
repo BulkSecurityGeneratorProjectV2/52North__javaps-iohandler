@@ -1,0 +1,6 @@
+{
+  "formats": [
+  {"mimeType":"text/xml", "default":true},
+  {"mimeType":"application/xml"}
+  ]
+}
