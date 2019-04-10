@@ -1,10 +1,28 @@
+<!--
+
+    Copyright 20165-2019 52°North Initiative for Geospatial Open Source
+    Software GmbH
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>org.n52.wps</groupId>
 		<artifactId>javaPS</artifactId>
-		<version>1.1.2-SNAPSHOT</version>
+		<version>1.2.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.n52.geoprocessing</groupId>
@@ -56,7 +74,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
-		<version.java>1.8</version.java>
 	</properties>
 
 	<dependencies>
@@ -68,7 +85,6 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.locationtech.jts</groupId>
@@ -120,16 +136,118 @@
 				</includes>
 			</resource>
 		</resources>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<compilerVersion>${version.java}</compilerVersion>
-					<source>${version.java}</source>
-					<target>${version.java}</target>
-				</configuration>
-			</plugin>
+		<plugins>            
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>groovy-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <source>project.properties['currentYearDynamic'] = java.time.Year.now().toString()</source>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <inherited>false</inherited>
+                <configuration>
+                    <aggregate>true</aggregate>
+                    <header>etc/license-header.txt</header>
+                    <includes>
+                        <include>**/*.java</include>
+                        <include>**/*.xml</include>
+                    </includes>
+                    <strictCheck>true</strictCheck>
+                    <properties>
+                        <year>${project.inceptionYear}-${currentYearDynamic}</year>
+                    </properties>
+                    <mapping>
+                        <java>SLASHSTAR_STYLE</java>
+                    </mapping>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>format-license-headers</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
+	
+	<profiles>
+        <profile>
+            <id>jdk8</id>
+            <activation>
+                <jdk>1.8</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jasig.maven</groupId>
+                        <artifactId>maven-notice-plugin</artifactId>
+                        <configuration>
+                            <licenseMapping>
+                                <param>http://52north.github.io/cdn/licenses/license-mappings.xml</param>
+                            </licenseMapping>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>since-jdk9</id>
+            <activation>
+                <jdk>[9,)</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jasig.maven</groupId>
+                        <artifactId>maven-notice-plugin</artifactId>
+                        <configuration>
+                            <licenseMapping>
+                                <param>http://52north.github.io/cdn/licenses/license-mappings-jdk9.xml</param>
+                            </licenseMapping>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>create-license-list</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                        <version>1.5</version>
+                        <configuration>
+                            <useMissingFile>true</useMissingFile>
+                            <fileTemplate>etc/license-as-csv.ftl</fileTemplate>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>first</id>
+                                <goals>
+                                    <goal>aggregate-add-third-party</goal>
+                                </goals>
+                                <phase>generate-resources</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+	
 </project>
