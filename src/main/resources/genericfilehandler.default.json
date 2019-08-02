@@ -3,6 +3,17 @@
   {"mimeType":"application/x-zipped-shp", "default":true},
   {"mimeType":"application/x-zipped-shp", "encoding":"base64"},
   {"mimeType":"image/png"},
-  {"mimeType":"image/png", "encoding":"base64"}
+  {"mimeType":"image/png", "encoding":"base64"},
+  {
+    "mimeType" : "image/tiff",
+    "encoding" : "base64"
+  }, {
+    "mimeType" : "image/geotiff",
+    "encoding" : "base64"
+  }, {
+    "mimeType" : "image/tiff"
+  }, {
+    "mimeType" : "image/geotiff"
+  }
   ]
 }
