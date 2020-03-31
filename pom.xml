@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2016-2019 52°North Initiative for Geospatial Open Source
+    Copyright 2016-2020 52°North Initiative for Geospatial Open Source
     Software GmbH
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@
 	<parent>
 		<groupId>org.n52.wps</groupId>
 		<artifactId>javaPS</artifactId>
-	    <version>1.4.0</version>
+	    <version>1.5.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.n52.geoprocessing</groupId>
@@ -135,7 +135,24 @@
 				</includes>
 			</resource>
 		</resources>
-		<plugins>            
+		<plugins>      
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/config/assemble.xml</descriptor>
+							</descriptors>
+						</configuration>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<phase>install</phase>
+					</execution>
+				</executions>
+			</plugin>      
             <plugin>
                 <groupId>org.codehaus.gmaven</groupId>
                 <artifactId>groovy-maven-plugin</artifactId>
