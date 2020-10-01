@@ -28,6 +28,7 @@ This project includes:
   Apache Commons IO under Apache License, Version 2.0
   Apache Commons Lang under Apache License, Version 2.0
   Apache Commons Logging under The Apache Software License, Version 2.0
+  Apache Commons Text under Apache License, Version 2.0
   Apache HttpClient under Apache License, Version 2.0
   Apache HttpCore under Apache License, Version 2.0
   c3p0 under GNU Lesser General Public License, Version 2.1 or Eclipse Public License, Version 1.0
@@ -54,7 +55,7 @@ This project includes:
   mchange-commons-java under GNU Lesser General Public License, Version 2.1 or Eclipse Public License, Version 1.0
   Old JAXB Core under CDDL 1.1 or GPL2 w/ CPE
   Old JAXB Runtime under CDDL 1.1 or GPL2 w/ CPE
-  org.locationtech.jts:jts-core under Eclipse Publish License, Version 1.0 or Eclipse Distribution License - v 1.0
+  org.locationtech.jts:jts-core under Eclipse Public License, Version 2.0 or Eclipse Distribution License - v 1.0
   quartz under The Apache Software License, Version 2.0
   SLF4J API Module under MIT License
   Spring AOP under Apache License, Version 2.0
