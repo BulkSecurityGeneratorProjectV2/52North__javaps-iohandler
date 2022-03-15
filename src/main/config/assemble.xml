@@ -29,7 +29,6 @@
 		<dependencySet>
 			<includes>
 				<include>org.n52.geoprocessing:javaps-iohandler</include>
-                <include>org.apache.xmlbeans:xmlbeans</include>
 			</includes>
 			<outputDirectory>deploy-to-javaps</outputDirectory>
 		</dependencySet>
