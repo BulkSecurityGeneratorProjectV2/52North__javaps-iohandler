@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.List;
 
 import org.n52.javaps.description.TypedProcessOutputDescription;
@@ -50,7 +51,7 @@ public class WCPSGenerator extends AbstractPropertiesInputOutputHandler implemen
 
         List<byte[]> wcpsoutput = ((ArrayDataBinding) data).getPayload();
 
-        File tempFile = File.createTempFile("wcps", ".bin");
+        File tempFile = Files.createTempFile("wcps", ".bin").toFile();
         // this.finalizeFiles.add(tempFile);//TODO
         try (FileOutputStream fos = new FileOutputStream(tempFile)) {
 

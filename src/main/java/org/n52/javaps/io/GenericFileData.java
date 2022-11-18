@@ -23,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -223,7 +224,7 @@ public class GenericFileData {
                 if (fileExtension.equals("shp")) {
                     extension = ZIP;
                 }
-                primaryFile = File.createTempFile(UUID.randomUUID().toString(), "." + extension);
+                primaryFile = Files.createTempFile(UUID.randomUUID().toString(), "." + extension).toFile();
                 OutputStream out = new FileOutputStream(primaryFile);
                 byte[] buf = new byte[1024];
                 int len;
@@ -239,7 +240,7 @@ public class GenericFileData {
         }
         if (unzipIfPossible && extension.contains(ZIP)) {
             try {
-                File tempFile1 = File.createTempFile(UUID.randomUUID().toString(), "");
+                File tempFile1 = Files.createTempFile(UUID.randomUUID().toString(), "").toFile();
                 File dir = new File(tempFile1.getParentFile() + "/" + UUID.randomUUID().toString());
                 if (!dir.mkdir()) {
                     String message = COULD_NOT_CREATE_DIRECTORY + dir.getAbsolutePath();
